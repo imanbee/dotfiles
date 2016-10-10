@@ -36,26 +36,28 @@ Plugin 'dag/vim-fish'
 " ctrlp is file fuzzy search
 Plugin 'kien/ctrlp.vim'
 " Ack.vim uses ack to search within files
-"Plugin 'mileszs/ack.vim'
+Plugin 'mileszs/ack.vim'
 "Airline provides a stylish appearance for the styleline
-"Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 " Syntastic provides syntax info
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 "Show git info in the gutter, sad that it and syntastic fight for space though
-"Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 "Integrate with tmux
-"Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 "Provides Sublime-Text like smart completion of braces, parens and such
-"Plugin 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 " Great helpful autocompletion (requires a separate compile step)
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 "Easy commenting in Vim
 Plugin 'tpope/vim-commentary'
+" Async linting engine
+Plugin 'w0rp/ale'
 
 " ### Use sometimes
 
 "Nerdtree provides a file explorer, which is sometimes useful. Mostly ctrlp handles file finding though
-"Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 " fugitive provides git bindings in Vim.  Don't use too much, but useful for blame
 Plugin 'tpope/vim-fugitive'
 " Surround is useful for adding surrounding tags to elements (especially html and quotes)
@@ -69,7 +71,7 @@ Plugin 'SirVer/ultisnips'
 "Standardize whitespace
 Plugin 'editorconfig/editorconfig-vim'
 "Gives smart completions for Javascript
-"Plugin 'marijnh/tern_for_vim'
+Plugin 'marijnh/tern_for_vim'
 "Shortcut for switching buffers and other stuff
 Plugin 'tpope/vim-unimpaired'
 
