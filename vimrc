@@ -34,11 +34,12 @@ Plugin 'dag/vim-fish'
 " ### Indispensable
 
 " ctrlp is file fuzzy search
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlp/ctrlp.vim'
 " Ack.vim uses ack to search within files
 Plugin 'mileszs/ack.vim'
 "Airline provides a stylish appearance for the styleline
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " Syntastic provides syntax info
 Plugin 'scrooloose/syntastic'
 "Show git info in the gutter, sad that it and syntastic fight for space though
@@ -227,15 +228,10 @@ map <leader>rr :source ~/.vimrc<CR>
 " Plugin Options
 " ==============
 
-
-" CTRL+P options
-
-set wildignore+=*/wcui/dist/*
-let g:ctrlp_user_command = 'ag %s -i --nocolor --ignore .git  --ignore .svn  --ignore .hg  --ignore .DS_Store  --ignore "**/*.pyc"  -g ""'
-
 " Airline options
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'luna'
 set noshowmode " Let airline handle the mode display
 
 
