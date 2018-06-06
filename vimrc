@@ -10,7 +10,6 @@ filetype off
 "Add vundle and any other packages not installed through vundle to our lookup
 "path
 set rtp+=~/.vim/bundle/vundle/
-"set rtp+=/usr/local/lib/node_modules/typescript-tools
 call vundle#begin()
 Plugin 'gmarik/vundle'
 
@@ -19,19 +18,23 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/base16-vim'
 
 " # Enhanced Syntax
-"Plugin 'othree/yajs.vim'
-"Plugin 'plasticboy/vim-markdown'
-"Plugin 'elzr/vim-json'
+Plugin 'othree/yajs.vim'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'elzr/vim-json'
+
+" Stylefmt
+Plugin 'kewah/vim-stylefmt'
 
 " # Extra Syntax
 Plugin 'groenewege/vim-less'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'lepture/vim-jinja'
 Plugin 'dag/vim-fish'
-
-" Functionality
-
-" ### Indispensable
+Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'mxw/vim-jsx'
+" Typescript syntax files for Vim
+Plugin 'leafgarland/typescript-vim'
 
 " ctrlp is file fuzzy search
 Plugin 'ctrlp/ctrlp.vim'
@@ -40,6 +43,8 @@ Plugin 'mileszs/ack.vim'
 "Airline provides a stylish appearance for the styleline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Bundle 'edkolev/tmuxline.vim'
+
 " Syntastic provides syntax info
 Plugin 'scrooloose/syntastic'
 "Show git info in the gutter, sad that it and syntastic fight for space though
@@ -53,12 +58,11 @@ Plugin 'Valloric/YouCompleteMe'
 "Easy commenting in Vim
 Plugin 'tpope/vim-commentary'
 " Async linting engine
-Plugin 'w0rp/ale'
-
-" ### Use sometimes
-
+"Plugin 'w0rp/ale'
 "Nerdtree provides a file explorer, which is sometimes useful. Mostly ctrlp handles file finding though
 Plugin 'scrooloose/nerdtree'
+"Provides comment functionality
+Plugin 'scrooloose/nerdcommenter'
 " fugitive provides git bindings in Vim.  Don't use too much, but useful for blame
 Plugin 'tpope/vim-fugitive'
 " Surround is useful for adding surrounding tags to elements (especially html and quotes)
@@ -92,15 +96,20 @@ syntax on
 syntax enable
 set t_Co=256
 
+colorscheme solarized
+set background=dark
+set guifont=Source\ Code\ Pro\ For\ Powerline
+let base16colorspace=256  " Access colors present in 256 colorspace
+
 " Use base-16 for the color scheme, different themes in GUI and terminal
 if has('gui_running')
     "colorscheme solarized
-    set background=dark
-    set guifont=Source\ Code\ Pro\ For\ Powerline
+    "set background=dark
+    "set guifont=Source\ Code\ Pro\ For\ Powerline
 else
     "let base16colorspace=256  " Access colors present in 256 colorspace
     "colorscheme base16-eighties
-    set background=dark
+    "set background=dark
 endif
 
 " Sanity Config (Don't edit text like an animal)
@@ -168,13 +177,13 @@ endif
 " Indentation and Display
 " =======================
 
-" We want to replace tabs with spaces and have 4 space width indentation
+" We want to replace tabs with spaces and have 2 space width indentation
 set autoindent
 set smartindent
 set smarttab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 set expandtab
 
 set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
@@ -224,11 +233,24 @@ map K i<Enter><Esc>
 "\rr => refresh vimrc
 map <leader>rr :source ~/.vimrc<CR>
 
+map <leader>bn :bn<cr>
+map <leader>bp :bp<cr>
+map <leader>bd :bd<cr>  
+
 
 " Plugin Options
 " ==============
 
+" ALE
+let g:ale_linters = {
+\ 'javascript': ['eslint']
+\}
+
+" Enable completion where available.
+let g:ale_completion_enabled = 1
+
 " Airline options
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'luna'
@@ -243,8 +265,10 @@ map <Leader>e :Errors<cr>
 let g:syntastic_javascript_checkers = ["eslint"]
 
 "NerdTree Options
-map <c-t> :NERDTreeToggle<CR>
+map <C-k><C-b> :NERDTreeToggle<CR>
 let NERDTreeHijackNetrw=1 "Put Nerdtree into a window
+let g:NERDTreeQuitOnOpen=1
+let NERDTreeShowHidden=1
 
 "YouCompleteMe options
 let g:ycm_min_num_of_chars_for_completion=3
@@ -303,6 +327,22 @@ autocmd BufNewFile,BufRead *.es6   set filetype=javascript
 "Typescript
 let g:syntastic_typescript_tsc_args ='-t ES5 --module commonjs'
 
-
 "Tern for es6
 "let g:tern#command=['/usr/local/bin/node', '/Users/ben/Code/projects/tern-es6/bin/tern']
+let g:tern_show_argument_hints='on_hold'
+let g:tern_map_keys=1
+
+"vim-jsx settings
+"hightlight JSX in js files
+let g:jsx_ext_required = 0
+
+"fugitive
+nnoremap <leader>st :Gstatus<CR>
+
+
+" CSSComb
+nnoremap <leader>bc :Stylefmt<CR>
+
+" Ctrlp ignore some folders
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+

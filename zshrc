@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-#export PATH=$HOME/bin:/usr/local/bin:$PATH:.
+# export PATH=$HOME/.node/bin:$HOME/bin:/usr/local/bin:$PATH:.
+export PATH="$PATH:`yarn global bin`:$HOME/.config/yarn/global/node_modules/.bin/"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/pchelkin/.oh-my-zsh
@@ -57,6 +58,8 @@ plugins+=(zsh-nvm)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+export WORKON_HOME=~/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
